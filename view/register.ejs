@@ -1,0 +1,184 @@
+<html>
+<head>
+	<title>Register</title>
+<style type="text/css">
+	fieldset{
+		width: 100%;
+		height: auto;
+		border:none;
+		margin-top: 0;
+		padding-top: 0;
+	}
+#head{
+background-color:black;
+color: white;
+height: 80px;
+
+}
+h1{
+
+	padding: 15px;
+}
+main{
+	background-color: white;
+
+		height: 420px;
+	color:black;
+padding: 0px;
+}
+a{
+	background-color: purple;
+    border: none;
+    color: #FFFFFF;
+    padding: 10px 22px;
+    text-align: center;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    text-decoration: none;
+   font-size: 16px;
+   cursor: pointer;
+   display: inline-block;
+}
+
+
+footer{
+height: 30px;
+background-color: black;
+padding: :0px;
+color: white;
+padding-top: 10px;
+}
+
+#name{
+
+	width:400px;
+
+border: none;
+background-color:transparent;
+color: purple;
+ border-bottom: 1px solid black;
+  padding: 8px 8px;
+  appearance: none;
+  outline: none;
+}
+#password{
+
+	width:400px;
+
+border: none;
+background-color:transparent;
+color: purple;
+ border-bottom: 1px solid black;
+  padding: 8px 8px;
+  appearance: none;
+  outline: none;
+}
+#empid{
+
+	width:400px;
+
+border: none;
+background-color:transparent;
+color: purple;
+ border-bottom: 1px solid black;
+  padding: 8px 8px;
+  appearance: none;
+  outline: none;
+}
+#email{
+
+	width:400px;
+
+border: none;
+background-color:transparent;
+color: purple;
+ border-bottom: 1px solid black;
+  padding: 8px 8px;
+  appearance: none;
+  outline: none;
+}
+button{
+
+	border-radius: 10px;
+	height: 30px;
+	width: 100px;
+}
+body{
+	margin-top: 0;
+		padding-top: 0;
+}
+</style>
+
+
+	<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	 $("#registerbtn").click(function(){
+    var data={
+        name:$("#name").val(),
+         empid:$("#empid").val(),
+
+      email:$("#email").val(),
+      password:$("#password").val()
+    };
+    // alert(JSON.stringify(data));
+    $.ajax({
+      type:'POST',
+      dataType:'json',
+      url:"http://localhost:8081/register",
+      data:JSON.stringify(data),
+      contentType:"application/json",
+      //console.log(data.emaila);
+      success: function(res) {
+        console.log(res);
+       window.location.href="/login";
+        alert(res.resMsg);
+
+      },
+      error:function(err){
+        console.log(err);
+      }
+    });
+    return false;
+    });
+});
+</script>
+	
+</head>
+<BODY>
+	<fieldset>
+	<header id="head" class="head">
+		<center><h1>E-Buy</h1></center>
+	</header>
+	<main>
+	<a href="\home">Home</a>
+	<a href="\list">Product list</a>
+	<a href="\addlist">Add Product</a>
+	<a href="\addgroup">Add Group</a>
+	<a href="\loginpage">Login</a>
+	<a class="sep" id="sep" href="\logout">Log Out</a>
+	<center>
+	<form id="register" class="register" name="register" >
+		<br><br>
+		<input type="text" name="name" id="name" class="name" placeholder="name*">
+		<br><br>
+		<input type="email" name="email" id="email" class="email" placeholder="Email*">
+		<br><br>
+		<input type="text" name="empid" id="empid" class="empid" placeholder="EmployeeId*">
+		<br><br>
+		<input type="password" name="password" id="password" class="password" placeholder="password*">
+		<br><br>
+		
+		<button name="registerbtn" id="registerbtn" class="registerbtn">Register</button><br>
+	</form>
+	</center>
+</main>
+<footer>
+	
+
+</footer>
+</fieldset>
+</center>
+</BODY>
+</html>

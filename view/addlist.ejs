@@ -1,0 +1,232 @@
+<html>
+<head>
+	<title>Register</title>
+<style type="text/css">
+	fieldset{
+		width: 100%;
+		height: auto;
+		border:none;
+		margin-top: 0;
+		padding-top: 0;
+	}
+	form{
+		border:4px solid black;
+  padding: 10px 0;
+  margin: auto;
+  width:auto;
+  height: 370px;
+	}
+	#product{
+		width:500px;
+
+border: none;
+background-color:transparent;
+color: purple;
+ border-bottom: 1px solid black;
+  padding: 8px 8px;
+  appearance: none;
+  outline: none;
+	}
+	#discount{
+		width:500px;
+
+border: none;
+background-color:transparent;
+color: purple;
+ border-bottom: 1px solid black;
+  padding: 8px 8px;
+  appearance: none;
+  outline: none;
+	}
+	#Maingroup{
+   width:500px;
+margin-left: 5px;
+border: none;
+background-color:transparent;
+color: purple;
+ border-bottom: 1px solid black;
+  padding: 8px 8px;
+  appearance: none;
+  outline: none;
+}
+label{
+  
+  color: purple;
+}
+	#price{
+		width:500px;
+
+border: none;
+background-color:transparent;
+color: purple;
+ border-bottom: 1px solid black;
+  padding: 8px 8px;
+  appearance: none;
+  outline: none;
+	}
+#head{
+background-color:black;
+color: white;
+height: 80px;
+
+}
+h1{
+
+	padding: 15px;
+}
+main{
+	background-color: white;
+
+		height: 420px;
+	color:black;
+padding: 0px;
+}
+a{
+	background-color: purple;
+    border: none;
+    color: #FFFFFF;
+    padding: 10px 22px;
+    text-align: center;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    text-decoration: none;
+   font-size: 16px;
+   cursor: pointer;
+   display: inline-block;
+}
+
+footer{
+height: 30px;
+background-color: black;
+padding: :0px;
+color: white;
+padding-top: 10px;
+}
+body{
+	margin-top: 0;
+		padding-top: 0;
+}
+img{
+
+border-width: 4px;
+border-color: black;
+	height: 70px;
+	width: 100px;
+
+}
+</style>
+	<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+var imgsrc;
+ function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+
+                $('#preimage').attr('src', e.target.result);
+ $("#url").val($('#image').val());
+            }
+
+            reader.readAsDataURL(input.files[0]);
+
+        }
+    }
+
+    $("#image").change(function () {
+        readURL(this);
+    });
+
+$("#addbtn").click(function(){
+ 		
+ 		var formData=new FormData();
+ 		console.log(formData);
+ 		formData.append('image',$('#image')[0].files[0]);
+ 		formData.append('product',$('#product').val());
+ 		formData.append('price',$('#price').val());
+ 		formData.append('discount',$('#discount').val());
+ 		 formData.append('maingroup',$('select#Maingroup').val());
+		
+		$.ajax({
+			
+			enctype: 'multipart/form-data',
+			url:"http://localhost:8081/add",
+
+			 cache: false,
+        contentType: false,
+        processData: false,
+        data: formData,
+        type: 'POST',
+		
+			success: function(res) {
+				console.log(res);
+				alert(res.resMsg);
+				$("#product").val("");
+			  $("#price").val("");
+			  $("#discount").val("");
+			  $("#url").val("");
+			  $("#image").val("");
+			  $("#preimage").attr('src','');
+
+			},
+			error:function(err){
+				console.log(err);
+			}
+		});
+		return false;
+    });
+
+
+
+
+
+
+});
+</script>
+</head>
+<BODY>
+	<fieldset>
+	<header id="head" class="head">
+		<center><h1>E-Buy</h1></center>
+	</header>
+	<main>
+		<a href="\home">Home</a>
+	<a href="\list">Product list</a>
+	<a href="\addlist">Add Product</a>
+	<a href="\addgroup">Add Group</a>
+	<a href="\loginpage">Login</a>
+	<a href="\logout">LogOut</a>
+	<center>
+
+	<form id="addlistform" class="addlistform" name="addlistform" enctype="multipart/form-data" >
+		<br><br>		
+		<input type="text" name="product" id="product" class="product" placeholder="Productname*">
+		<br><br>
+		
+       <select  id="Maingroup" class="Maingroup">
+       	<option value="0">--Select Main Group--</option>  
+       	<%{%> <% result.forEach(function(result){  %>
+  <option value="<%- result.maingroup %>"><%- result.maingroup %></option>
+  
+  <% } )%><%} %>
+</select>
+        <br><br>
+		<input type="text" name="price" id="price" class="price" placeholder="Price*">
+		<br><br><input type="text" name="discount" id="discount" class="discount" placeholder="discount">
+				<br><br>
+<input type="file" id="image" name="image" class="image" value="" ><img  id="preimage" name="preimage" class="preimage"> </img><br><br>
+		<input type="text" name="url" id="url" class="url" hidden="true">
+		<button name="addbtn" id="addbtn" class="addbtn">Save</button><br>
+	</form>
+	</center>
+</main>
+<footer>
+	
+
+</footer>
+</fieldset>
+
+</BODY>
+</html>
