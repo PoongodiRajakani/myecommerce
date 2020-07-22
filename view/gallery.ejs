@@ -1,0 +1,240 @@
+<html>
+  <head>
+   
+    <style type="text/css">
+  fieldset{
+    width: 100%;
+    height: auto;
+    border:none;
+    margin-top: 0;
+    padding-top: 0;
+  }
+#head{
+background-color:black;
+color: white;
+height: 80px;
+
+}
+h1{
+
+  padding: 15px;
+}
+
+#row{
+background-color: green;
+   min-height: 440px;
+    max-height: auto;
+}
+
+a{
+  background-color: purple;
+    border: none;
+    color: #FFFFFF;
+    padding: 10px 22px;
+    text-align: center;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    text-decoration: none;
+   font-size: 16px;
+   cursor: pointer;
+   display: inline-block;
+}
+#lk{
+   background-color: purple;
+    border: none;
+    color: #FFFFFF;
+    padding: 0px 0px;
+    
+   
+}
+#non{
+  background-color: transparent;
+    border: none;
+    color: red;
+    padding: 10px 22px;
+    text-align: center;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    text-decoration: none;
+   font-size: 16px;
+   cursor: pointer;
+  
+}
+
+button{
+
+  border-radius: 10px;
+  height: 30px;
+  width: 100px;
+}
+
+form{
+    border:4px solid black;
+  padding: 10px 0;
+  margin: auto;
+  width:auto;
+ min-height:  370px;
+ 
+  }
+  #image{
+
+border:3px solid purple;
+  height: 140px;
+  width: 220px;
+
+}
+li{
+display: block;
+float: left;
+
+}
+
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+main{
+
+
+    min-height: 440px;
+    max-height: auto;
+  color:black;
+padding: 0px;
+}
+footer{
+height: 30px;
+background-color: black;
+padding: :0px;
+color: white;
+padding-top: 10px;
+}
+body{
+  margin-top: 0;
+    padding-top: 0;
+}
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  }
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+/* Modal Content (image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+/* Caption of Modal Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+
+.modal-content, #caption {  
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.6s;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+
+</style>
+   <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+   <script>
+    function myclose(){
+
+ $('#modal').css("display", "none");
+
+    }
+    function imagefunction(src)
+  {
+   
+      $('#modal').css("display", "block");
+       console.log(src);
+         console.log(this.alt);
+              
+           $('#modal-content').attr('src',src);
+              $('#caption').innerHTML = "Snow";
+   }
+     </script>
+  </head>
+
+  <body >
+      <fieldset>
+  <header id="head" class="head">
+    <center><h1>E-Buy</h1></center>
+  </header>
+  <main>
+    <a href="\home">Home</a>
+  <a href="\list">Product list</a>
+  <a href="\addlist">Add Product</a>
+  <a href="\addgroup">Add Group</a>
+  <a href="\Gallery">Gallery</a>
+  <a href="\loginpage">Login</a>
+  <a href="\logout">LogOut</a>
+ 
+
+   
+      <br>
+       <ul id="result" class="result">
+        <center>
+        <%{%> <% result.forEach(function(result){  %>
+
+      
+   
+        <li ><a id="lk" class="lk"><img class="image" alt="Snow" onclick="imagefunction(this.src)" id="image" src="/image/<%- result.image %>" title="" /><h5 onclick="imagefunction(this.src)"><%- result.product %></h5></a></li>
+     
+      
+   
+     <% } )%><%} %>
+     </center>
+   </ul>
+    
+   
+    <div id="modal" class="modal">
+  <span class="close" onclick="myclose()">&times;</span>
+  <center>
+  <img class="modal-content" id="modal-content">
+  </center>
+  <div id="caption" class="caption"></div>
+</div>
+    </main>
+
+
+</fieldset>
+  </body>
+
+</html>
