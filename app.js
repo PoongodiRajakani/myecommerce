@@ -77,6 +77,27 @@ app.get('/addlist', function(req, res)
 
 });
 
+app.get('/gallery', function(req, res)
+ {
+ 	var token=req.session.token;
+	console.log(token);
+	if(!token) return res.render(path.join(__dirname + '/view/login.ejs'),{ errormessage: 'access denied' });
+	try{
+		var result;
+		const verified=jwt.verify(token,'my_secret_key');
+
+		req.user=verified;
+
+		usermodel.find({},function(err,result){
+	res.render(path.join(__dirname + '/view/gallery.ejs'),{result:result});
+});
+
+	}catch{
+	res.render(path.join(__dirname + '/view/home.ejs'),{ errormessage: 'Invalid Token' });
+	}
+
+});
+
 app.get('/addgroup', function(req, res)
  {var result;
  	

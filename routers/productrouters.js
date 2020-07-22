@@ -27,6 +27,7 @@ var storage = multer.diskStorage({
   		name=Date.now()+'_'+firstname;
   		name+=ext;
   	}
+  uploadImage=[];
   uploadImage.push({'name': name});
 
     callback(null, name);
