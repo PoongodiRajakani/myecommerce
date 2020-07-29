@@ -48,7 +48,19 @@ a{
    cursor: pointer;
    display: inline-block;
 }
-
+#aa{
+  background-color: transparent;
+    border: none;
+    color: red;
+   
+    text-align: center;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    text-decoration: none;
+   font-size: 16px;
+   cursor: pointer;
+   display: inline-block;
+}
 footer{
 height: 30px;
 background-color: black;
@@ -71,8 +83,13 @@ border-color: black;
 
 
 </style>
+ <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.dataTables.min.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
-  <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+ <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.flash.min.js"></script>
@@ -83,44 +100,16 @@ border-color: black;
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
 
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.dataTables.min.css">
 
-
+ 
 <script type="text/javascript">
 	$(document).ready(function() {
     $('#example').DataTable({
 
 dom: 'Bfrtip',
-        // buttons: [
-        //     'copy', 'csv', 'excel', 'pdf', 'print'
-        // ],
         buttons: [
-       {
-           extend: 'pdf',
-           footer: true,
-           exportOptions: {
-                columns: [0,1,2]
-            }
-       },
-       {
-           extend: 'csv',
-           footer: false,
-           exportOptions: {
-                columns: [0,1,2]
-            }
-          
-       },
-       {
-           extend: 'excel',
-           footer: false,
-           exportOptions: {
-                columns: [0,1,2]
-            }
-       }         
-    ]
-
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
     });
     });
 
@@ -137,6 +126,7 @@ dom: 'Bfrtip',
 	<a href="\addlist">Add Product</a>
   <a href="\addgroup">Add Group</a>
   <a href="\Gallery">Gallery</a>
+  <a href="\search">Search</a>
 	<a href="\loginpage">Login</a>
   <a href="\logout">LogOut</a>
 	<center>
@@ -148,15 +138,17 @@ dom: 'Bfrtip',
 <tr ><th>Product</th>
 <th>Name</th>
 <th>Price</th>
-
+<th></th>
 </tr>
  </thead>
  <tbody>
 <%{%> <% result.forEach(function(result){  %>
       <tr>
-        <td><img src="/image/<%- result.image %>"</td>
+        <td><img src="/image/<%- result.image %>"></td>
         <td><%- result.product %></td>
            <td><%- result.price %></td>
+          <td><a class="aa" id="aa" href="\updatelist" style="color: red">EDIT</a></td>
+           <td><a class="aa" id="aa" href="\deletelist" style="color: red">DELETE</a></td>
       </tr>
     <% } )%><%} %>
  </tbody>

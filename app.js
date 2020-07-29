@@ -29,6 +29,7 @@ var control2=require('./routers/maingrouprouters.js');
 app.route('/register').post(control.register);
 app.route('/login').post(control.login);
 app.route('/add').post(control1.add);
+app.route('/searchh').post(control1.searchh);
 app.route('/addmaingroup').post(control2.addmaingroup);
 app.get('/', function(req, res)
  {
@@ -70,6 +71,27 @@ app.get('/addlist', function(req, res)
 	 	usermodel1.find({},function(err,result){
 
 	res.render(path.join(__dirname + '/view/addlist.ejs'),{result:result});
+});
+	}catch{
+	res.render(path.join(__dirname + '/view/home.ejs'),{ errormessage: 'Invalid Token' });
+	}
+
+});
+app.get('/updatelist', function(req, res)
+ {
+ 	var token=req.session.token;
+	console.log(token);
+	if(!token) return res.render(path.join(__dirname + '/view/login.ejs'),{ errormessage: 'access denied' });
+	try{
+		const verified=jwt.verify(token,'my_secret_key');
+
+		req.user=verified;
+		var result;
+var detail;
+
+	 	usermodel1.find({},function(err,result){
+
+	res.render(path.join(__dirname + '/view/updateproduct.ejs'),{result:result});
 });
 	}catch{
 	res.render(path.join(__dirname + '/view/home.ejs'),{ errormessage: 'Invalid Token' });
@@ -128,6 +150,24 @@ var token=req.session.token;
 
 		req.user=verified;
 	res.render(path.join(__dirname + '/view/viewlist.ejs'),{result:result});
+	}catch{
+		res.render(path.join(__dirname + '/view/home.ejs'),{ errormessage: "Invalid Token" });
+	}
+
+
+});
+ });
+app.get('/search', function(req, res)
+ {var result;
+ 	usermodel.find({},function(err,result){
+var token=req.session.token;
+	console.log(token);
+	if(!token) return res.render(path.join(__dirname + '/view/login.ejs'),{ errormessage: 'access denied' });
+	try{
+		const verified=jwt.verify(token,'my_secret_key');
+
+		req.user=verified;
+	res.render(path.join(__dirname + '/view/search.ejs'),{result:result});
 	}catch{
 		res.render(path.join(__dirname + '/view/home.ejs'),{ errormessage: "Invalid Token" });
 	}

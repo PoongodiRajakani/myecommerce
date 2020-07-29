@@ -96,3 +96,30 @@ var pro={
 });
 }
 
+
+
+exports.searchh = function(req, res) {
+	
+		console.log('searchh : ',req.body);
+
+var name=req.body.product;
+//console.log( "/^" + name+"/");
+usermodel.find({ 'product': new RegExp(name, 'i') } ,function(err, items) {
+	//usermodel.find({name}, function(err,result){
+if(err){
+
+}else if(items!=null){
+	var resJson = {};
+     console.log('items:',items);
+
+	
+	console.log("inside");
+ //res.json({'status':'FETCH',message:result});
+
+			resJson.resType = 'success';
+			resJson.resMsg = items;
+		}
+res.json(resJson);
+});
+
+}
